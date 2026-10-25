@@ -21,6 +21,9 @@ htmlcov/
 wandb/
 */wandb/
 *.log
+lectures/var/files/
+*/var/files/
+
 
 # Datasets & Weights (Files > 50MB rejected by GitHub)
 data/*.txt
