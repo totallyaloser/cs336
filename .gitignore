@@ -1,0 +1,51 @@
+# Python & Virtual Environments
+.venv/
+*/.venv/
+venv/
+ENV/
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing & Tooling
+.pytest_cache/
+*/.pytest_cache/
+.ruff_cache/
+*/.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Logs & Monitoring
+wandb/
+*/wandb/
+*.log
+
+# Datasets & Weights (Files > 50MB rejected by GitHub)
+data/*.txt
+data/*.gz
+data/*.tar
+data/*.zip
+data/*.parquet
+data/*.bin
+*/data/*.txt
+*/data/*.gz
+*/data/*.tar
+*/data/*.zip
+*/data/*.parquet
+*/data/*.bin
+
+# PyTorch checkpoints
+*.pt
+*.pth
+*.bin
+*.safetensors
+checkpoints/
+*/checkpoints/
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
