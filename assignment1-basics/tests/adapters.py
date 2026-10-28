@@ -11,10 +11,10 @@ from torch import Tensor
 
 
 def run_linear(
-    d_in: int,
-    d_out: int,
-    weights: Float[Tensor, " d_out d_in"],
-    in_features: Float[Tensor, " ... d_in"],
+        d_in: int,
+        d_out: int,
+        weights: Float[Tensor, " d_out d_in"],
+        in_features: Float[Tensor, " ... d_in"],
 ) -> Float[Tensor, " ... d_out"]:
     """
     Given the weights of a Linear layer, compute the transformation of a batched input.
@@ -33,10 +33,10 @@ def run_linear(
 
 
 def run_embedding(
-    vocab_size: int,
-    d_model: int,
-    weights: Float[Tensor, " vocab_size d_model"],
-    token_ids: Int[Tensor, " ..."],
+        vocab_size: int,
+        d_model: int,
+        weights: Float[Tensor, " vocab_size d_model"],
+        token_ids: Int[Tensor, " ..."],
 ) -> Float[Tensor, " ... d_model"]:
     """
     Given the weights of an Embedding layer, get the embeddings for a batch of token ids.
@@ -55,12 +55,12 @@ def run_embedding(
 
 
 def run_swiglu(
-    d_model: int,
-    d_ff: int,
-    w1_weight: Float[Tensor, " d_ff d_model"],
-    w2_weight: Float[Tensor, " d_model d_ff"],
-    w3_weight: Float[Tensor, " d_ff d_model"],
-    in_features: Float[Tensor, " ... d_model"],
+        d_model: int,
+        d_ff: int,
+        w1_weight: Float[Tensor, " d_ff d_model"],
+        w2_weight: Float[Tensor, " d_model d_ff"],
+        w3_weight: Float[Tensor, " d_ff d_model"],
+        in_features: Float[Tensor, " ... d_model"],
 ) -> Float[Tensor, " ... d_model"]:
     """Given the weights of a SwiGLU network, return
     the output of your implementation with these weights.
@@ -87,10 +87,10 @@ def run_swiglu(
 
 
 def run_scaled_dot_product_attention(
-    Q: Float[Tensor, " ... queries d_k"],
-    K: Float[Tensor, " ... keys d_k"],
-    V: Float[Tensor, " ... keys d_v"],
-    mask: Bool[Tensor, " ... queries keys"] | None = None,
+        Q: Float[Tensor, " ... queries d_k"],
+        K: Float[Tensor, " ... keys d_k"],
+        V: Float[Tensor, " ... keys d_v"],
+        mask: Bool[Tensor, " ... queries keys"] | None = None,
 ) -> Float[Tensor, " ... queries d_v"]:
     """
     Given key (K), query (Q), and value (V) tensors, return
@@ -108,13 +108,13 @@ def run_scaled_dot_product_attention(
 
 
 def run_multihead_self_attention(
-    d_model: int,
-    num_heads: int,
-    q_proj_weight: Float[Tensor, " d_model d_model"],
-    k_proj_weight: Float[Tensor, " d_model d_model"],
-    v_proj_weight: Float[Tensor, " d_model d_model"],
-    o_proj_weight: Float[Tensor, " d_model d_model"],
-    in_features: Float[Tensor, " ... sequence_length d_model"],
+        d_model: int,
+        num_heads: int,
+        q_proj_weight: Float[Tensor, " d_model d_model"],
+        k_proj_weight: Float[Tensor, " d_model d_model"],
+        v_proj_weight: Float[Tensor, " d_model d_model"],
+        o_proj_weight: Float[Tensor, " d_model d_model"],
+        in_features: Float[Tensor, " ... sequence_length d_model"],
 ) -> Float[Tensor, " ... sequence_length d_model"]:
     """
     Given the key, query, and value projection weights of a naive unbatched
@@ -142,16 +142,16 @@ def run_multihead_self_attention(
 
 
 def run_multihead_self_attention_with_rope(
-    d_model: int,
-    num_heads: int,
-    max_seq_len: int,
-    theta: float,
-    q_proj_weight: Float[Tensor, " d_model d_model"],
-    k_proj_weight: Float[Tensor, " d_model d_model"],
-    v_proj_weight: Float[Tensor, " d_model d_model"],
-    o_proj_weight: Float[Tensor, " d_model d_model"],
-    in_features: Float[Tensor, " ... sequence_length d_model"],
-    token_positions: Int[Tensor, " ... sequence_length"] | None = None,
+        d_model: int,
+        num_heads: int,
+        max_seq_len: int,
+        theta: float,
+        q_proj_weight: Float[Tensor, " d_model d_model"],
+        k_proj_weight: Float[Tensor, " d_model d_model"],
+        v_proj_weight: Float[Tensor, " d_model d_model"],
+        o_proj_weight: Float[Tensor, " d_model d_model"],
+        in_features: Float[Tensor, " ... sequence_length d_model"],
+        token_positions: Int[Tensor, " ... sequence_length"] | None = None,
 ) -> Float[Tensor, " ... sequence_length d_model"]:
     """
     Given the key, query, and value projection weights of a naive unbatched
@@ -182,11 +182,11 @@ def run_multihead_self_attention_with_rope(
 
 
 def run_rope(
-    d_k: int,
-    theta: float,
-    max_seq_len: int,
-    in_query_or_key: Float[Tensor, " ... sequence_length d_k"],
-    token_positions: Int[Tensor, " ... sequence_length"],
+        d_k: int,
+        theta: float,
+        max_seq_len: int,
+        in_query_or_key: Float[Tensor, " ... sequence_length d_k"],
+        token_positions: Int[Tensor, " ... sequence_length"],
 ) -> Float[Tensor, " ... sequence_length d_k"]:
     """
     Run RoPE for a given input tensor.
@@ -204,13 +204,13 @@ def run_rope(
 
 
 def run_transformer_block(
-    d_model: int,
-    num_heads: int,
-    d_ff: int,
-    max_seq_len: int,
-    theta: float,
-    weights: dict[str, Tensor],
-    in_features: Float[Tensor, " batch sequence_length d_model"],
+        d_model: int,
+        num_heads: int,
+        d_ff: int,
+        max_seq_len: int,
+        theta: float,
+        weights: dict[str, Tensor],
+        in_features: Float[Tensor, " batch sequence_length d_model"],
 ) -> Float[Tensor, " batch sequence_length d_model"]:
     """
     Given the weights of a pre-norm Transformer block and input features,
@@ -277,15 +277,15 @@ def run_transformer_block(
 
 
 def run_transformer_lm(
-    vocab_size: int,
-    context_length: int,
-    d_model: int,
-    num_layers: int,
-    num_heads: int,
-    d_ff: int,
-    rope_theta: float,
-    weights: dict[str, Tensor],
-    in_indices: Int[Tensor, " batch_size sequence_length"],
+        vocab_size: int,
+        context_length: int,
+        d_model: int,
+        num_layers: int,
+        num_heads: int,
+        d_ff: int,
+        rope_theta: float,
+        weights: dict[str, Tensor],
+        in_indices: Int[Tensor, " batch_size sequence_length"],
 ) -> Float[Tensor, " batch_size sequence_length vocab_size"]:
     """Given the weights of a Transformer language model and input indices,
     return the output of running a forward pass on the input indices.
@@ -359,10 +359,10 @@ def run_transformer_lm(
 
 
 def run_rmsnorm(
-    d_model: int,
-    eps: float,
-    weights: Float[Tensor, " d_model"],
-    in_features: Float[Tensor, " ... d_model"],
+        d_model: int,
+        eps: float,
+        weights: Float[Tensor, " d_model"],
+        in_features: Float[Tensor, " ... d_model"],
 ) -> Float[Tensor, " ... d_model"]:
     """Given the weights of a RMSNorm affine transform,
     return the output of running RMSNorm on the input features.
@@ -396,7 +396,7 @@ def run_silu(in_features: Float[Tensor, " ..."]) -> Float[Tensor, " ..."]:
 
 
 def run_get_batch(
-    dataset: npt.NDArray, batch_size: int, context_length: int, device: str
+        dataset: npt.NDArray, batch_size: int, context_length: int, device: str
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """
     Given a dataset (a 1D numpy array of integers) and a desired batch size and
@@ -435,7 +435,7 @@ def run_softmax(in_features: Float[Tensor, " ..."], dim: int) -> Float[Tensor, "
 
 
 def run_cross_entropy(
-    inputs: Float[Tensor, " batch_size vocab_size"], targets: Int[Tensor, " batch_size"]
+        inputs: Float[Tensor, " batch_size vocab_size"], targets: Int[Tensor, " batch_size"]
 ) -> Float[Tensor, ""]:
     """Given a tensor of inputs and targets, compute the average cross-entropy
     loss across examples.
@@ -472,11 +472,11 @@ def get_adamw_cls() -> Any:
 
 
 def run_get_lr_cosine_schedule(
-    it: int,
-    max_learning_rate: float,
-    min_learning_rate: float,
-    warmup_iters: int,
-    cosine_cycle_iters: int,
+        it: int,
+        max_learning_rate: float,
+        min_learning_rate: float,
+        warmup_iters: int,
+        cosine_cycle_iters: int,
 ):
     """
     Given the parameters of a cosine learning rate decay schedule (with linear
@@ -500,10 +500,10 @@ def run_get_lr_cosine_schedule(
 
 
 def run_save_checkpoint(
-    model: torch.nn.Module,
-    optimizer: torch.optim.Optimizer,
-    iteration: int,
-    out: str | os.PathLike | BinaryIO | IO[bytes],
+        model: torch.nn.Module,
+        optimizer: torch.optim.Optimizer,
+        iteration: int,
+        out: str | os.PathLike | BinaryIO | IO[bytes],
 ):
     """
     Given a model, optimizer, and an iteration number, serialize them to disk.
@@ -519,9 +519,9 @@ def run_save_checkpoint(
 
 
 def run_load_checkpoint(
-    src: str | os.PathLike | BinaryIO | IO[bytes],
-    model: torch.nn.Module,
-    optimizer: torch.optim.Optimizer,
+        src: str | os.PathLike | BinaryIO | IO[bytes],
+        model: torch.nn.Module,
+        optimizer: torch.optim.Optimizer,
 ) -> int:
     """
     Given a serialized checkpoint (path or file-like object), restore the
@@ -540,9 +540,9 @@ def run_load_checkpoint(
 
 
 def get_tokenizer(
-    vocab: dict[int, bytes],
-    merges: list[tuple[bytes, bytes]],
-    special_tokens: list[str] | None = None,
+        vocab: dict[int, bytes],
+        merges: list[tuple[bytes, bytes]],
+        special_tokens: list[str] | None = None,
 ) -> Any:
     """Given a vocabulary, a list of merges, and a list of special tokens,
     return a BPE tokenizer that uses the provided vocab, merges, and special tokens.
@@ -563,10 +563,10 @@ def get_tokenizer(
 
 
 def run_train_bpe(
-    input_path: str | os.PathLike,
-    vocab_size: int,
-    special_tokens: list[str],
-    **kwargs,
+        input_path: str | os.PathLike,
+        vocab_size: int,
+        special_tokens: list[str],
+        **kwargs,
 ) -> tuple[dict[int, bytes], list[tuple[bytes, bytes]]]:
     """Given the path to an input corpus, run train a BPE tokenizer and
     output its vocabulary and merges.
@@ -589,4 +589,94 @@ def run_train_bpe(
                 representing that <token1> was merged with <token2>.
                 Merges are ordered by order of creation.
     """
-    raise NotImplementedError
+    from collections import Counter, defaultdict
+    import regex as re
+
+    # ==========================================
+    # 阶段 1：预处理与字符串级频次统计
+    # ==========================================
+    # 先用 Counter 统计原始 pre-token 字符串的频次，避免重复 encode
+    raw_word_counter: Counter[str] = Counter()
+    # TODO:
+    # 1. 读取文件，按长度降序的 special_tokens 切分 chunks（注意处理 special_tokens 为空的情况）
+    # 2. 对每个 chunk 用 re.finditer(PAT, chunk) 提取字符串，更新到 raw_word_counts
+    PAT = r"""'(?:[sdmt]|ll|ve|re)| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+"""
+    SPECIAL_TOKENS_PAT = "|".join(re.escape(token) for token in sorted(special_tokens, key=lambda k: -len(k)))
+    with open(input_path, encoding="utf-8") as f:
+        content = f.read()
+        chunks = re.split(SPECIAL_TOKENS_PAT, content)
+        for chunk in chunks:
+            raw_word_counter.update(match.group(0) for match in re.finditer(PAT, chunk))
+
+    # ==========================================
+    # 阶段 2：构建核心索引结构（词表列表 + 倒排索引 + 初始 Pair 计数）
+    # ==========================================
+    # 给每个唯一词分配一个整数 ID (0, 1, 2, ...)，用列表下标直接代表 word_id
+    words: list[list[bytes]] = []
+    counts: list[int] = []
+
+    # 核心结构 1：全局相邻对频次表
+    pair_counter: dict[tuple[bytes, bytes], int] = defaultdict(int)
+
+    # 核心结构 2：倒排索引（记录每个 pair 出现在哪些 word_id 中）
+    pair_to_word_ids: dict[tuple[bytes, bytes], set[int]] = defaultdict(set)
+
+    # TODO:
+    # 遍历 raw_word_counts，填充 words 和 counts 列表；
+    # 同时统计初始的所有相邻对，初始化 pair_counter 和 pair_to_word_ids
+    for word_id, (raw_word, count) in enumerate(raw_word_counter.items()):
+        raw_word_bytes = [bytes([b]) for b in raw_word.encode("utf-8")]
+        words.append(raw_word_bytes)
+        counts.append(count)
+
+        for idx in range(len(raw_word_bytes)- 1):
+            pair = (raw_word_bytes[idx], raw_word_bytes[idx + 1])
+            pair_counter[pair] = pair_counter[pair] + count
+            pair_to_word_ids[pair].add(word_id)
+
+    # ==========================================
+    # 阶段 4：BPE 核心 Merge 循环（增量更新）
+    # ==========================================
+    merges:list[tuple[bytes, bytes]] = []
+    merge_tokens:list[bytes] = []
+    iter_nums = max(vocab_size - 256 - len(special_tokens), 0)
+    for _ in range(iter_nums):
+        if not pair_counter:
+            break
+        # --- 步骤 4.1：选出当前频次最高的 best_pair ---
+        best_pair = max(pair_counter, key=lambda k: (pair_counter[k], k))
+        part1, part2 = best_pair
+        best_token = part1 + part2
+        merges.append(best_pair)
+        merge_tokens.append(best_token)
+        # --- 步骤 4.2：通过倒排索引，只获取包含 best_pair 的词 ID 集合 ---
+        affected_word_ids = pair_to_word_ids.pop(best_pair)
+        for word_id in affected_word_ids:
+            affected_word = words[word_id]
+            count = counts[word_id]
+            # 删除受影响的word中pair
+            for i in range(len(affected_word) - 1):
+                affected_pair = (affected_word[i], affected_word[i + 1])
+                pair_counter[affected_pair] -= count
+                pair_to_word_ids[affected_pair].discard(word_id)
+                if pair_counter[affected_pair] == 0:
+                    del pair_counter[affected_pair]
+            # 合并
+            new_affect_word:list[bytes] = []
+            i = 0
+            while i < len(affected_word):
+                if i < len(affected_word) - 1 and affected_word[i] == part1 and affected_word[i+1] == part2:
+                    new_affect_word.append(best_token)
+                    i += 2
+                else:
+                    new_affect_word.append(affected_word[i])
+                    i += 1
+            words[word_id] = new_affect_word
+            # 新增受影响word中的pair
+            for i in range(len(new_affect_word)- 1):
+                new_pair = (new_affect_word[i], new_affect_word[i + 1])
+                pair_counter[new_pair] += count
+                pair_to_word_ids[new_pair].add(word_id)
+    rt_lst = [spt.encode("utf-8") for spt in special_tokens] + [bytes([i]) for i in range(256)] + merge_tokens
+    vocab:dict[int,bytes] = {i:b  for i, b in enumerate(rt_lst)}
+    return vocab, merges
